@@ -3,7 +3,7 @@ const API_KYEY = "bdebfbd56aa02bc66c48751fd367cc66";
 const cards = document.getElementById("cards");
 const card = document.querySelectorAll(".card");
 
-const card_order = [];
+ 
 
 function getWeather(city) {
   const weather_url = `https://api.openweathermap.org/data/2.5/weather?q=${city},srilanka&appid=${API_KYEY}`;
@@ -24,6 +24,7 @@ function getWeather(city) {
 function kelvinToCelcius(temp) {
   return Math.floor(temp - 273.15);
 }
+
 function createWeatherCard(data) {
   const card = document.createElement("div");
   const temp = document.createElement("p");
