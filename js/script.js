@@ -1,8 +1,9 @@
 const refresh_btn = document.getElementById("refresh");
 const API_KYEY = "bdebfbd56aa02bc66c48751fd367cc66";
-const cards = document.getElementById('cards');
+const cards = document.getElementById("cards");
 const card = document.querySelectorAll(".card");
 
+const card_order = [];
 
 function getWeather(city) {
   const weather_url = `https://api.openweathermap.org/data/2.5/weather?q=${city},srilanka&appid=${API_KYEY}`;
@@ -10,11 +11,14 @@ function getWeather(city) {
   return fetch(weather_url)
     .then((response) => response.json())
     .then((data) => {
-      return [data["main"].temp, data["weather"][0].description];
+        console.log(data)
+      return [data["main"].feels_like, data["weather"][0].description];
+      
     })
     .catch((error) => {
       return error + "error";
     });
+    
 }
 
 function kelvinToCelcius(temp) {
@@ -34,16 +38,19 @@ function createWeatherCard(data) {
 
   return card;
 }
+ 
+ 
+ 
 
 
 card.forEach((card) => {
   let city = card.querySelector("button").value;
   getWeather(city).then((data) => {
+ 
     const weather_card = createWeatherCard(data);
+    
     card.appendChild(weather_card);
   });
 });
 
-function sortWeatherCards(){
-    
-}
+// function sortWeatherCards() {}
